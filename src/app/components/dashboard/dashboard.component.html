@@ -1,0 +1,64 @@
+<section class="py-3">
+  <div>
+    <div class="text-muted">Home</div>
+    <div class="mt-1"><h5>Dashboard</h5></div>
+  </div>
+  <div class="mt-1">
+    <div class="cards">
+      <div class="card" *ngFor="let currentdata of data | keyvalue: returnZero">
+        <div class="card-body">
+          <div class="card-title row">
+            <div class="col">{{ currentdata.key }}</div>
+            <div
+              class="col"
+              class="text-muted float-right mr-4"
+              *ngIf="data[currentdata.key].total"
+            >
+              ({{ data[currentdata.key].total }} total)
+            </div>
+            <div class="col" *ngIf="data[currentdata.key].filter">
+              <select id="cars" class="float-right">
+                <option value="volvo">Month to Date</option>
+              </select>
+            </div>
+          </div>
+          <h5 [ngStyle]="{color: data[currentdata.key].color}" >{{ data[currentdata.key].score }}</h5>
+          <div class="text-muted">
+            <i class="{{ data[currentdata.key].icon }}" aria-hidden="true"> </i>
+            {{ data[currentdata.key].value }}
+          </div>
+          <div class="row" *ngIf="data[currentdata.key].dataPoint">
+            <div class="col-md-6">
+              <div
+                class="text-muted"
+                *ngFor="let stats of data[currentdata.key].dataPoint | keyvalue"
+              >
+                {{ stats.key }} - {{ stats.value }}
+              </div>
+            </div>
+            <div class="col-md-6 border-left" style="margin-top: -20px">
+              <div>
+                <canvas
+                  baseChart
+                  [data]="[21, 30, 80, 30]"
+                  [chartType]="doughnutChartType"
+                >
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-1">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title text-center">Locations</div>
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</section>

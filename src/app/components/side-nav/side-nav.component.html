@@ -1,0 +1,13 @@
+<section>
+  <div class="px-3 pt-3">
+    <ul *ngFor="let nav of navOptions | keyvalue: returnZero" class="py-1 title-color">
+      {{
+        nav.key | uppercase
+      }}
+      <li *ngFor="let option of nav.value">
+        <i class="{{ option.icon }}" aria-hidden="true" class="col-md-2"> </i>
+        <a class="col-md-10">{{ option.title }}</a>
+      </li>
+    </ul>
+  </div>
+</section>
